@@ -24,6 +24,7 @@ git pull origin [branch name]
 *推送代码*
 git push origin [branch name]
 
+[附上git常用命令速查表](https://github.com/StudyForReact/firstRN/blob/master/static/git.jpg)
 
 ###项目api地址
 暂无
