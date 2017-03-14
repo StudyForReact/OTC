@@ -1,5 +1,9 @@
+写在项目开始前的话，项目开始前请认真阅读git flow工作流程，并且自己尝试后再开始。
+
+###请先加入QQ群： 167124582
+
 ###项目目的
-项目主要是为了学习react native而建立的一个repo，有想学习的人都可以加入进来，完全开源
+项目主要是为了学习react native而建立的一个repo，有想学习的人都可以加入进来，完全开源.
 
 ###工作流程
 > 工作流程按照git flow流程开发
@@ -17,6 +21,7 @@
 5. git push origin [branch name] *推送代码*
 
 ![附上git常用命令速查表](https://github.com/StudyForReact/firstRN/blob/master/static/git.jpg)
+[附上git flow流程](http://blog.jobbole.com/76867/)
 
 ###项目api地址
 暂无
