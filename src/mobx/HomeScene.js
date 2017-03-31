@@ -1,5 +1,5 @@
 import { observable } from 'mobx'
 
 class HomeScene {
-  @HomeToast = false
+  @observable HomeToast = false
 }

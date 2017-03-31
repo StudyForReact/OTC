@@ -1,27 +1,39 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import {
   View,
   StyleSheet,
   Text,
-  StatusBar
+  StatusBar,
+  Button
 } from 'react-native'
+import { observer } from 'mobx-react/native'
 import RootStore from './mobx'
+import Slider from './components/Silder'
 
 @observer
-export default class App extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      showToast: false
-    }
+export default class App extends PureComponent {
+
+  static navigationOptions = {
+    title: 'App'
   }
+
+  navigateTo = () => {
+    alert('jump')
+    this.props.navigation.navigate('Home', {user: 'Home'})
+  }
+
   render () {
     return (
       <View style={styles.container}>
         <StatusBar
           barStyle={RootStore.barStyle}
-        ></StatusBar>
-        <Text>App</Text>
+        />
+        <Slider></Slider>
+        <Button
+          onPress={this.navigateTo}
+          title="点我跳转"
+        >
+        </Button>
       </View>
     )
   }
@@ -30,8 +42,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
     backgroundColor: '#F5FCFF',
   }
 });
