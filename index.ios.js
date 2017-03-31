@@ -4,11 +4,21 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
   AppRegistry
 } from 'react-native';
 
-import App from './src/app'
+import ScenesRoute from './src/routes'
 
-AppRegistry.registerComponent('firstRN', () => App);
+if (!__DEV__) {
+  global.console = {
+    info: () => {},
+    log: () => {},
+    warn: () => {},
+    error: () => {},
+  };
+}
+console.log(__DEV__)
+
+AppRegistry.registerComponent('firstRN', () => ScenesRoute);

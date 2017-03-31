@@ -1,10 +1,26 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Text,
+  StatusBar
+} from 'react-native'
+import RootStore from './mobx'
 
+@observer
 export default class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      showToast: false
+    }
+  }
   render () {
     return (
       <View style={styles.container}>
+        <StatusBar
+          barStyle={RootStore.barStyle}
+        ></StatusBar>
         <Text>App</Text>
       </View>
     )
