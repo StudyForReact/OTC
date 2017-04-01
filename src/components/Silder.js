@@ -4,7 +4,8 @@ import {
   Text,
   Animated,
   StyleSheet,
-  Image
+  Image,
+  ScrollView
 } from 'react-native'
 import { GOLBAL_WINDOW } from '../common'
 
@@ -39,8 +40,10 @@ export default class Silder extends Component {
    * @type {Object}
    */
   static defaultProps = {
+    dots: false,
+    infinite: false,
     speed: 2000,
-    autoPlay: false,
+    autoplay: false,
     ratio: 9 / 20,
     dataSource: [{
       path: ""

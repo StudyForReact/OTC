@@ -19,7 +19,7 @@ export default class App extends PureComponent {
 
   navigateTo = () => {
     alert('jump')
-    this.props.navigation.navigate('Home', {user: 'Home'})
+    this.props.navigation.navigate('Home')
   }
 
   render () {
