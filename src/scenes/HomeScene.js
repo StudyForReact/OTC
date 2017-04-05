@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 
 export default class HomeScene extends Component {
+  
   static navigationOptions = {
     title: 'Home',
     header: ({state, setParams}) => {
@@ -14,6 +15,7 @@ export default class HomeScene extends Component {
       )
     }
   }
+
   render () {
     return (
       <View style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>

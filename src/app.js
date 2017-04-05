@@ -8,7 +8,8 @@ import {
 } from 'react-native'
 import { observer } from 'mobx-react/native'
 import RootStore from './mobx'
-import Slider from './components/Silder'
+import Slider from './components/Slider'
+import img from '../static/baner.jpg'
 
 @observer
 export default class App extends PureComponent {
@@ -18,8 +19,10 @@ export default class App extends PureComponent {
   }
 
   navigateTo = () => {
-    alert('jump')
     this.props.navigation.navigate('Home')
+  }
+
+  componentDidMount () {
   }
 
   render () {
@@ -28,12 +31,9 @@ export default class App extends PureComponent {
         <StatusBar
           barStyle={RootStore.barStyle}
         />
-        <Slider></Slider>
-        <Button
-          onPress={this.navigateTo}
-          title="点我跳转"
-        >
-        </Button>
+        <Slider
+          dataSource={[{url: img},{url: img}]}
+        />
       </View>
     )
   }
