@@ -35,9 +35,18 @@ export default class Slider extends PureComponent {
     leftArrowText: 'Left',
     rightArrowText: 'Right',
     bullets: true,
-    bulletStyle: null,
-    bulletsContainerStyle: null,
-    chosenBulletStyle: null,
+    bulletStyle: {
+      margin: 5,
+      backgroundColor: 'rgba(0,0,0,.5)',
+      borderWidth: 0
+    },
+    bulletsContainerStyle: {
+      bottom: -10
+    },
+    chosenBulletStyle: {
+      margin: 5,
+      backgroundColor: '#52B124'
+    },
     onAnimateNextPage: () => {
       console.log('debug')
     },

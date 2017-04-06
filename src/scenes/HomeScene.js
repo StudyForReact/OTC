@@ -8,14 +8,7 @@ import {
 export default class HomeScene extends Component {
 
   static navigationOptions = {
-    title: 'Home',
-    header: {
-      title: <Text>帅哥</Text>,
-      backTitle: '返回',
-      style: {
-        marginTop: -22
-      }
-    }
+    title: 'Home'
   }
 
   render () {

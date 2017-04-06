@@ -3,7 +3,7 @@ import {
 } from 'react-native'
 
 // api路径
-export const SERVICE_PATH = 'hrhg.integrity.com.cn'
+export const SERVICE_PATH = 'http://aten35.ticp.net:8081/yffs/rest/app'
 
 // 获取设备的宽高
 export const GOLBAL_WINDOW = {

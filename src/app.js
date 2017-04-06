@@ -11,20 +11,21 @@ import RootStore from './mobx'
 import Slider from './components/Slider'
 import img from '../static/baner.jpg'
 import Search from './components/Search'
+import Icon from './components/Icon'
+import LeftImg from '../static/mipmap-xhdpi/ic_home_menu_bg.png'
+import RightImg from '../static/mipmap-xhdpi/ic_home_msg_bg.png'
+import Header from './components/Header'
 
 @observer
 export default class App extends PureComponent {
 
   static navigationOptions = {
-    title: 'APP',
-    headerMode: 'screen',
-    header: {
-      visible: false,
-      style: {
-        marginTop: -22
-      },
-      title: <Search placeholder="请输入" searchAction={() => {alert('s')}} />
+    drawer: () => {
+      label: 'Home'
     }
+  }
+  state = {
+    unReadMsg: 0
   }
 
   navigateTo = () => {
@@ -38,7 +39,12 @@ export default class App extends PureComponent {
     return (
       <View style={styles.container}>
         <StatusBar
-          hidden
+          barStyle={RootStore.barStyle}
+        />
+        <Header
+          rightIcon={RightImg}
+          leftIcon={LeftImg}
+          leftIconAction={() => this.props.navigation.navigate('DrawerOpen')}
         />
         <Slider
           dataSource={[{url: img},{url: img}]}
