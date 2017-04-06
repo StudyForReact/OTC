@@ -14,15 +14,22 @@ import Search from './components/Search'
 import Icon from './components/Icon'
 import LeftImg from '../static/mipmap-xhdpi/ic_home_menu_bg.png'
 import RightImg from '../static/mipmap-xhdpi/ic_home_msg_bg.png'
-import Header from './components/Header'
+import Util from './common/libs'
+import appApi from './api/appApi'
 
 @observer
 export default class App extends PureComponent {
 
   static navigationOptions = {
-    drawer: () => {
-      label: 'Home'
-    }
+    title: 'App',
+    header: ({state, setParams}) => ({
+      style: {
+        backgroundColor: '#fff'
+      },
+      right: <Icon img={RightImg} iconAction={() => alert('right')} />,
+      left: <Icon img={LeftImg} iconAction={() => alert('left')} />,
+      title: <Search action={() => alert('search')} />
+    })
   }
   state = {
     unReadMsg: 0
@@ -33,6 +40,13 @@ export default class App extends PureComponent {
   }
 
   componentDidMount () {
+    (async () => {
+      await Util.get(appApi.banner, (response) => {
+        console.log(response)
+      }, error => {
+        console.log(error)
+      })
+    })()
   }
 
   render () {
@@ -41,13 +55,10 @@ export default class App extends PureComponent {
         <StatusBar
           barStyle={RootStore.barStyle}
         />
-        <Header
-          rightIcon={RightImg}
-          leftIcon={LeftImg}
-          leftIconAction={() => this.props.navigation.navigate('DrawerOpen')}
-        />
         <Slider
           dataSource={[{url: img},{url: img}]}
+          ratio={0.4}
+          delay={6000}
         />
         <Button
           onPress={this.navigateTo}

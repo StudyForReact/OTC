@@ -1,19 +1,33 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
   View,
   Text,
   Button
 } from 'react-native'
+import backImg from '../../static/mipmap-hdpi/ic_back_arrow_bg.png'
+import Icon from '../components/Icon'
 
-export default class HomeScene extends Component {
+export default class HomeScene extends PureComponent {
+  constructor (props) {
+    super(props)
+  }
 
   static navigationOptions = {
-    title: 'Home'
+    title: 'Home',
+    header: ({state, setParams}) => ({
+      style: {
+        backgroundColor: '#fff'
+      }
+    })
+  }
+
+  state = {
+    title: '我改变了title'
   }
 
   render () {
     return (
-      <View style={{flex: 1,justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{flex: 1,backgroundColor: '#f5f5f5',flexDirection: 'column'}}>
         <Text style={{fontSize: 15}}>Home</Text>
       </View>
     )

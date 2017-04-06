@@ -41,7 +41,7 @@ export default class Header extends Component {
       let Component = this.props.titleView;
 
       NavigationBar.push(
-        <Component key={'titleView'}/>
+        <Component key={'titleView'} action={this.props.titleAction}/>
       )
     }
 
@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
+    zIndex: 9
   }
 })

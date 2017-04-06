@@ -1,4 +1,4 @@
-import { DrawerNavigator } from 'react-navigation'
+import { StackNavigator } from 'react-navigation'
 import App from './app'
 import HomeScene from './scenes/HomeScene'
 
@@ -14,4 +14,7 @@ const ScenesRoute = {
   }
 }
 
-export default DrawerNavigator(ScenesRoute)
+export default StackNavigator(ScenesRoute, {
+  initialRouteName: 'App',
+  headerMode: 'float'
+})

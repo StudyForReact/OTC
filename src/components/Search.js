@@ -3,7 +3,8 @@ import {
   View,
   StyleSheet,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native'
 import { GOLBAL_WINDOW } from '../common'
 
@@ -13,8 +14,11 @@ const Search = ({...props}) => {
       <TouchableOpacity
         style={styles.searchCon}
         activeOpacity={0.8}
-        onPress={props.searchAction}
+        onPress={props.action}
       >
+        <View style={{justifyContent: 'center', alignItems: 'center', marginRight: 5}}>
+          <Image source={require('../../static/mipmap-hdpi/ic_home_category_search_bg.png')} style={{width: 15, height: 15}}/>
+        </View>
         <Text style={[styles.text, props.textStyle]}>{props.placeholder || '请输入要搜索的内容'}</Text>
       </TouchableOpacity>
     </View>
@@ -35,10 +39,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#eee',
     height: 30,
-    lineHeight: 30,
     width: GOLBAL_WINDOW.width - 100,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10
+    borderRadius: 15,
+    flexDirection: 'row'
   }
 })

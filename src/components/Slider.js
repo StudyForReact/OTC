@@ -14,7 +14,6 @@ export default class Slider extends PureComponent {
     autoPlay: React.PropTypes.bool,
     pageInfo: React.PropTypes.bool,
     onAnimateNextPage: React.PropTypes.func,
-    dataSource: React.PropTypes.array.isRequried,
     arrows: React.PropTypes.bool
   }
 
@@ -50,21 +49,22 @@ export default class Slider extends PureComponent {
     onAnimateNextPage: () => {
       console.log('debug')
     },
-    dataSource: () => []
+    dataSource: []
   }
 
   render () {
     return (
-      <View style={this.props.style}>
+      <View style={[this.props.style, {height: GOLBAL_WINDOW.width * this.props.ratio}]}>
         <Carousel
           {...this.props}
+          style={{height: GOLBAL_WINDOW.width * this.props.ratio}}
         >
           {
-            this.props.dataSource.map((item) => {
+            this.props.dataSource.map((item, index) => {
               return (
-                <View style={this.props.style}>
+                <View style={[this.props.style, {height: GOLBAL_WINDOW.width * this.props.ratio}]} key={index}>
                   <Image
-                    style={this.props.style}
+                    style={[this.props.style, {height: GOLBAL_WINDOW.width * this.props.ratio}]}
                     resizeMode='cover'
                     source={item.url}
                   >
