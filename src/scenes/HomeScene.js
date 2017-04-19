@@ -17,7 +17,11 @@ export default class HomeScene extends PureComponent {
     header: ({state, setParams}) => ({
       style: {
         backgroundColor: '#fff'
-      }
+      },
+      titleStyle: {
+        color: '#000'
+      },
+      tintColor: '#999'
     })
   }
 

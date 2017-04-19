@@ -11,6 +11,7 @@ import RootStore from './mobx'
 import Slider from './components/Slider'
 import img from '../static/baner.jpg'
 import Search from './components/Search'
+import Section from './components/Section'
 import Icon from './components/Icon'
 import LeftImg from '../static/mipmap-xhdpi/ic_home_menu_bg.png'
 import RightImg from '../static/mipmap-xhdpi/ic_home_msg_bg.png'
@@ -60,6 +61,19 @@ export default class App extends PureComponent {
           ratio={0.4}
           delay={6000}
         />
+        <Section dataSource={[{
+          brandName: 'demo',
+          brandPrice: 1230,
+          uri: '../static/20160505150406298.jpg'
+        },{
+          brandName: 'demo',
+          brandPrice: 1230,
+          uri: '../static/20160505150406298.jpg'
+        },{
+          brandName: 'demo',
+          brandPrice: 1230,
+          uri: '../static/20160505150406298.jpg'
+        }]} />
         <Button
           onPress={this.navigateTo}
           title="点我跳转"

@@ -16,5 +16,5 @@ const ScenesRoute = {
 
 export default StackNavigator(ScenesRoute, {
   initialRouteName: 'App',
-  headerMode: 'float'
+  headerMode: 'screen'
 })

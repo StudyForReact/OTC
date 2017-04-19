@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   View,
   StyleSheet,
@@ -10,12 +11,15 @@ const BrandList = ({...props}) => {
     <View
       style={styles.brandList}
     >
-      <Image source={uri: this.props.uri} style={{width: '100%', mode: Image.resizeMode.contain}} />
+      <Image source={{uri: props.uri}} style={{
+        width: '100%',
+        mode: Image.resizeMode.contain
+      }} />
       <Text style={{fontSize: 15, color: '#333'}}>
-        {this.props.brandName}
+        {props.brandName}
       </Text>
       <Text style={{fontSize: 15, color: '#333'}}>
-        {this.props.brandPrice}
+        {props.brandPrice}
       </Text>
     </View>
   )
