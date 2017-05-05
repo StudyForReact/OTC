@@ -8,7 +8,7 @@ import {
   AppRegistry
 } from 'react-native';
 
-import ScenesRoute from './src/routes'
+import App from './src/app'
 
 if (!__DEV__) {
   global.console = {
@@ -20,4 +20,4 @@ if (!__DEV__) {
 }
 console.log(__DEV__)
 
-AppRegistry.registerComponent('firstRN', () => ScenesRoute);
+AppRegistry.registerComponent('firstRN', () => App);

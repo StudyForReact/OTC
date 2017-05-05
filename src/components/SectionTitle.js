@@ -7,12 +7,13 @@ import {
 } from 'react-native'
 
 const SectionTitle = ({...props}) => {
+  const { name, showIcon } = props
   return (
     <View
       style={styles.sectionTitle}
     >
       <Text>
-        Section
+        {name}
       </Text>
     </View>
   )

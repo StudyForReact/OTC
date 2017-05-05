@@ -7,19 +7,23 @@ import {
 } from 'react-native'
 
 const BrandList = ({...props}) => {
+  alert(props.dataSource.uri)
   return (
     <View
+      key={props.key}
       style={styles.brandList}
     >
-      <Image source={{uri: props.uri}} style={{
-        width: '100%',
-        mode: Image.resizeMode.contain
+      <Image
+        source={{uri: props.dataSource.uri}}
+        resizeMode='cover'
+        style={{
+        width: '100%'
       }} />
       <Text style={{fontSize: 15, color: '#333'}}>
-        {props.brandName}
+        {props.dataSource.brandName}
       </Text>
       <Text style={{fontSize: 15, color: '#333'}}>
-        {props.brandPrice}
+        {props.dataSource.brandPrice}
       </Text>
     </View>
   )
@@ -27,10 +31,10 @@ const BrandList = ({...props}) => {
 
 const styles = StyleSheet.create({
   brandList: {
-    backgroundColor: '#fff',
+    flex: 1,
     position: 'relative',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    alignItems: 'center',
     padding: 7
   }
 })

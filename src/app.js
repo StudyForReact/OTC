@@ -1,93 +1,74 @@
 import React, { PureComponent } from 'react'
 import {
   View,
-  StyleSheet,
-  Text,
   StatusBar,
-  Button
+  Animated,
+  StyleSheet,
+  Platform,
+  Text
 } from 'react-native'
 import { observer } from 'mobx-react/native'
+import NetInfoDecorator from './common/NetInfoDecorator'
+import AppNavigator from './routesStart'
 import RootStore from './mobx'
-import Slider from './components/Slider'
-import img from '../static/baner.jpg'
-import Search from './components/Search'
-import Section from './components/Section'
-import Icon from './components/Icon'
-import LeftImg from '../static/mipmap-xhdpi/ic_home_menu_bg.png'
-import RightImg from '../static/mipmap-xhdpi/ic_home_msg_bg.png'
-import Util from './common/libs'
-import appApi from './api/appApi'
 
+@NetInfoDecorator
 @observer
 export default class App extends PureComponent {
-
-  static navigationOptions = {
-    title: 'App',
-    header: ({state, setParams}) => ({
-      style: {
-        backgroundColor: '#fff'
-      },
-      right: <Icon img={RightImg} iconAction={() => alert('right')} />,
-      left: <Icon img={LeftImg} iconAction={() => alert('left')} />,
-      title: <Search action={() => alert('search')} />
-    })
-  }
-  state = {
-    unReadMsg: 0
+  constructor (props) {
+    super(props)
+    this.state = {
+      promptPosition: new Animated.Value(0)
+    }
   }
 
-  navigateTo = () => {
-    this.props.navigation.navigate('Home')
-  }
-
-  componentDidMount () {
-    (async () => {
-      await Util.get(appApi.banner, (response) => {
-        console.log(response)
-      }, error => {
-        console.log(error)
+  componetWillReceiveProps (nextProps) {
+    const { isConnected } = nextProps
+    // 无网络连接
+    if (!isConnected) {
+      Animated.timing(this.state.promptPosition, {
+        toValue: 1,
+        duration: 200
+      }).start(() => {
+        setTimeout(() => {
+          Animated.timing(this.state.promptPosition, {
+            toValue: 0,
+            duration: 200
+          }).start()
+        }, 2000)
       })
-    })()
+    }
   }
 
   render () {
+    let positionY = this.state.promptPosition.interpolate({
+      inputRange: [0, 1],
+      outputRange: [-30, Platform.OS === 'ios' ? 20 : 0]
+    })
     return (
-      <View style={styles.container}>
-        <StatusBar
-          barStyle={RootStore.barStyle}
-        />
-        <Slider
-          dataSource={[{url: img},{url: img}]}
-          ratio={0.4}
-          delay={6000}
-        />
-        <Section dataSource={[{
-          brandName: 'demo',
-          brandPrice: 1230,
-          uri: '../static/20160505150406298.jpg'
-        },{
-          brandName: 'demo',
-          brandPrice: 1230,
-          uri: '../static/20160505150406298.jpg'
-        },{
-          brandName: 'demo',
-          brandPrice: 1230,
-          uri: '../static/20160505150406298.jpg'
-        }]} />
-        <Button
-          onPress={this.navigateTo}
-          title="点我跳转"
-        >
-        </Button>
+      <View style={{flex: 1}}>
+        <StatusBar barStyle={RootStore.barStyle} />
+        <AppNavigator />
+        <Animated.View style={[styles.netInfoView, {top: positionY}]}>
+          <Text style={styles.netInfoPrompt}>网络连接不上，请检查网络后再试</Text>
+        </Animated.View>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#F5FCFF',
+cosnt styles = StyleSheet.create({
+  netInfoView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 30,
+    position: 'absolute',
+    right: 0,
+    left: 0,
+    backgroundColor: rgb(217, 51, 58)
+  },
+  netInfoPrompt: {
+    color: 'white',
+    fontWeight: 'bold'
   }
-});
+})

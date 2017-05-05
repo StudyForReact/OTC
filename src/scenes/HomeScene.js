@@ -1,39 +1,97 @@
 import React, { PureComponent } from 'react'
 import {
   View,
+  StyleSheet,
   Text,
+  StatusBar,
   Button
 } from 'react-native'
-import backImg from '../../static/mipmap-hdpi/ic_back_arrow_bg.png'
-import Icon from '../components/Icon'
+import { observer } from 'mobx-react/native'
+import RootStore from './mobx'
+import Slider from './components/Slider'
+import img from '../static/baner.jpg'
+import Search from './components/Search'
+import Section from './components/Section'
+import Icon from './components/Icon'
+import LeftImg from '../static/mipmap-xhdpi/ic_home_menu_bg.png'
+import RightImg from '../static/mipmap-xhdpi/ic_home_msg_bg.png'
+import Util from './common/libs'
+import appApi from './api/appApi'
 
-export default class HomeScene extends PureComponent {
-  constructor (props) {
-    super(props)
-  }
+@observer
+export default class App extends PureComponent {
 
   static navigationOptions = {
-    title: 'Home',
+    title: 'App',
     header: ({state, setParams}) => ({
       style: {
         backgroundColor: '#fff'
       },
-      titleStyle: {
-        color: '#000'
-      },
-      tintColor: '#999'
+      right: <Icon img={RightImg} iconAction={() => alert('right')} />,
+      left: <Icon img={LeftImg} iconAction={() => alert('left')} />,
+      title: <Search action={() => alert('search')} />
     })
   }
-
   state = {
-    title: '我改变了title'
+    unReadMsg: 0
+  }
+
+  navigateTo = () => {
+    this.props.navigation.navigate('Home')
+  }
+
+  componentDidMount () {
+    (async () => {
+      await Util.get(appApi.banner, (response) => {
+        console.log(response)
+      }, error => {
+        console.log(error)
+      })
+    })()
   }
 
   render () {
     return (
-      <View style={{flex: 1,backgroundColor: '#f5f5f5',flexDirection: 'column'}}>
-        <Text style={{fontSize: 15}}>Home</Text>
+      <View style={styles.container}>
+        <StatusBar
+          barStyle={RootStore.barStyle}
+        />
+        <Slider
+          dataSource={[{url: img},{url: img}]}
+          ratio={0.4}
+          delay={6000}
+        />
+        <Section dataSource={[{
+          name: 'title',
+          brandName: 'demo',
+          brandPrice: 1230,
+          uri: '../static/20160505150406298.jpg'
+        }, {
+          name: 'title1',
+          brandName: 'demo',
+          brandPrice: 1230,
+          uri: '../static/20160505150406298.jpg'
+        }, {
+          name: 'title2',
+          brandName: 'demo',
+          brandPrice: 1230,
+          uri: '../static/20160505150406298.jpg'
+        }]}
+        name="title" />
+        <Button
+          onPress={this.navigateTo}
+          title="点我跳转"
+        >
+        </Button>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#F5FCFF',
+  }
+});

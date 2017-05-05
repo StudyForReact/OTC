@@ -10,16 +10,15 @@ import SectionTitle from './SectionTitle'
 import BrandList from './BrandList'
 
 const Section = ({...props}) => {
-  const { name, showIcon } = props
   return (
     <View
       style={styles.section}
     >
-      <SectionTitle name={showIcon} showIcon={showIcon}  />
+      <SectionTitle name={props.name} />
       <View style={styles.brandContainer}>
         {
-          props.dataSource.map((item) => {
-            return <BrandList {...props} />
+          props.dataSource.map((item, index) => {
+            return <BrandList dataSource={item} key={index} />
           })
         }
       </View>
@@ -37,7 +36,9 @@ const styles = StyleSheet.create({
   brandContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '100%',
+    height: 100
   }
 })
 
