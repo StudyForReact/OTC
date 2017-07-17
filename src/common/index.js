@@ -22,3 +22,20 @@ export const COLOR_SETTING = {
   black: '#000',
   green: '#'
 }
+
+export const TRADE_HEAD = [{
+  text: '交易市场',
+  key: '1'
+},{
+  text: '最新价',
+  key: '2'
+}, {
+  text: '最高价',
+  key: '3'
+}, {
+  text: '最低价',
+  key: '4'
+}, {
+  text: '交易量',
+  key: '5'
+}]

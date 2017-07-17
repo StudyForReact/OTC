@@ -6,7 +6,7 @@ import {
   Image
 } from 'react-native'
 // components
-import SectionTitle from './SectionTitle'
+import CellItem from './CellItem'
 import BrandList from './BrandList'
 
 /**
@@ -19,7 +19,7 @@ const Section = ({...props}) => {
     <View
       style={styles.section}
     >
-      <SectionTitle name={props.name} />
+      <CellItem name={props.name} />
       <View style={styles.brandContainer}>
         {
           props.dataSource.map((item, index) => {

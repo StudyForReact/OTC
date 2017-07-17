@@ -12,8 +12,8 @@ import iconImg from '../../static/mipmap-xhdpi/ic_right_arrow_bg.png'
  * @desc 暂时废弃
  * @param {Object} props 
  */
-const SectionTitle = ({...props}) => {
-  const { name, showIcon, customComponent, text } = props
+const CellItem = ({...props}) => {
+  const { name, showIcon, customComponent, text = '去交易', link } = props
   let component = null
   if (customComponent) {
     component = customComponent
@@ -21,7 +21,7 @@ const SectionTitle = ({...props}) => {
     component = showIcon ? <View style={styles.icon}><Text style={{
       fontSize: 14,
       color: '#666'
-    }}>去交易</Text><Image style={styles.iconImg} source={iconImg}  /></View> : null
+    }}>{ text }</Text><Image style={styles.iconImg} source={iconImg}  /></View> : null
   }
   return (
     <View
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default SectionTitle
+export default CellItem

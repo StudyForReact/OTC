@@ -1,5 +1,8 @@
 import { StackNavigator, TabNavigator } from 'react-navigation'
+// Scene
 import HomeScene from './scenes/HomeScene'
+import ProfileScene from './scenes/ProfileScene'
+import IcoScene from './scenes/IcoScene'
 import React from 'react'
 import {
   Image,
@@ -30,7 +33,7 @@ const HomeRouter = TabNavigator({
   },
   // ico
   Ico: {
-    screen: HomeScene,
+    screen: IcoScene,
     path: 'index/Ico',
     navigationOptions: {
       tabBar: {
@@ -46,7 +49,7 @@ const HomeRouter = TabNavigator({
   },
   // 个人中心
   Profile: {
-    screen: HomeScene,
+    screen: ProfileScene,
     path: 'index/profile',
     navigationOptions: {
       tabBar: {

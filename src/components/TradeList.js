@@ -9,25 +9,19 @@ const TradeList = ({...props}) => {
   return (
     <View
       key={props.key}
-      style={styles.brandList}
+      style={styles.TradeList}
     >
-      <Text style={{fontSize: 15, color: '#333'}}>
-        {props.dataSource.brandName}
-      </Text>
-      <Text style={{fontSize: 15, color: '#333'}}>
-        {props.dataSource.brandPrice}
-      </Text>
+      <Text>ssss</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  brandList: {
-    flex: 1,
+  TradeList: {
+    height: 40,
     position: 'relative',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: 7
+    flexDirection: 'row',
+    padding: 5
   }
 })
 

@@ -9,7 +9,8 @@ import { observer } from 'mobx-react/native'
 import RootStore from '../mobx'
 import Slider from '../components/Slider'
 import Section from '../components/Section'
-import SectionTitle from '../components/SectionTitle'
+import CellItem from '../components/CellItem'
+import TradeTable from '../components/TradeTable'
 import img from '../../static/banner_KAC-ANS.jpg'
 import img1 from '../../static/banner_LZG-LZJ.jpg'
 import Icon from '../components/Icon'
@@ -61,7 +62,8 @@ export default class HomeScene extends PureComponent {
             url: img1
           }]}
         />
-        <SectionTitle name="ANS各平台信息" showIcon />
+        <CellItem name="ANS各平台信息" showIcon />
+        <TradeTable />
       </View>
     )
   }
