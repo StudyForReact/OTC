@@ -58,7 +58,7 @@ need build bash for build app
 ### 发布前注意事项
 
 * 合并当前分支到`develop`分支 并在`develop`测试通过，合并到`release-*`分支
-* 发布前修改config/message.js 中的配置，用于显示当前发布内容
+* 发布前修改xxx`待补充`中的配置，用于显示当前发布内容
 * ...
 
 ## 技术栈相关文档推荐
@@ -69,6 +69,7 @@ need build bash for build app
 - [mobx](https://github.com/mobxjs/mobx) 中小型项目使用mobx替代redux 提升性能
 - [react-native-looped-carousel](https://github.com/appintheair/react-native-looped-carousel) 轮播组件
 - [react-native](https://github.com/facebook/react-native) 基于react的移动端开发框架
+- [react-native-parallax-scroll-view](https://github.com/jaysoo/react-native-parallax-scroll-view) 
 - ...
 
 ## 迭代说明
