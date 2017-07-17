@@ -2,7 +2,7 @@ import { observable } from 'mobx'
 
 class RootStore {
   // 状态栏
-  @observable barStyle = 'light-content'
+  @observable barStyle = 'default'
   // 用户信息保存
   @observable user = {}
   // toast对象

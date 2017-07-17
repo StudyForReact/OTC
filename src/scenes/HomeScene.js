@@ -2,36 +2,37 @@ import React, { PureComponent } from 'react'
 import {
   View,
   StyleSheet,
-  Text,
-  StatusBar,
-  Button
+  Text
 } from 'react-native'
+
 import { observer } from 'mobx-react/native'
-import RootStore from './mobx'
-import Slider from './components/Slider'
-import img from '../static/baner.jpg'
-import Search from './components/Search'
-import Section from './components/Section'
-import Icon from './components/Icon'
-import LeftImg from '../static/mipmap-xhdpi/ic_home_menu_bg.png'
-import RightImg from '../static/mipmap-xhdpi/ic_home_msg_bg.png'
-import Util from './common/libs'
-import appApi from './api/appApi'
+import RootStore from '../mobx'
+import Slider from '../components/Slider'
+import Section from '../components/Section'
+import SectionTitle from '../components/SectionTitle'
+import img from '../../static/banner_KAC-ANS.jpg'
+import img1 from '../../static/banner_LZG-LZJ.jpg'
+import Icon from '../components/Icon'
+import LeftImg from '../../static/apple-touch-icon-152x152.png'
+import RightImg from '../../static/mipmap-xhdpi/ic_home_category_search_bg.png'
+import Util from '../common/libs'
+import appApi from '../api/appApi'
 
 @observer
-export default class App extends PureComponent {
+export default class HomeScene extends PureComponent {
 
   static navigationOptions = {
-    title: 'App',
+    title: 'Home',
     header: ({state, setParams}) => ({
       style: {
         backgroundColor: '#fff'
       },
-      right: <Icon img={RightImg} iconAction={() => alert('right')} />,
-      left: <Icon img={LeftImg} iconAction={() => alert('left')} />,
-      title: <Search action={() => alert('search')} />
+      right: <Icon img={RightImg} iconAction={() => alert('暂未开放')} />,
+      left: <Icon img={LeftImg} />,
+      title: '蓝鲸淘'
     })
   }
+
   state = {
     unReadMsg: 0
   }
@@ -53,36 +54,14 @@ export default class App extends PureComponent {
   render () {
     return (
       <View style={styles.container}>
-        <StatusBar
-          barStyle={RootStore.barStyle}
-        />
         <Slider
-          dataSource={[{url: img},{url: img}]}
-          ratio={0.4}
-          delay={6000}
+          dataSource={[{
+            url: img
+          },{
+            url: img1
+          }]}
         />
-        <Section dataSource={[{
-          name: 'title',
-          brandName: 'demo',
-          brandPrice: 1230,
-          uri: '../static/20160505150406298.jpg'
-        }, {
-          name: 'title1',
-          brandName: 'demo',
-          brandPrice: 1230,
-          uri: '../static/20160505150406298.jpg'
-        }, {
-          name: 'title2',
-          brandName: 'demo',
-          brandPrice: 1230,
-          uri: '../static/20160505150406298.jpg'
-        }]}
-        name="title" />
-        <Button
-          onPress={this.navigateTo}
-          title="点我跳转"
-        >
-        </Button>
+        <SectionTitle name="ANS各平台信息" showIcon />
       </View>
     )
   }
@@ -92,6 +71,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#f5f5f5',
   }
 });

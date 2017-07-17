@@ -15,6 +15,7 @@ import RootStore from './mobx'
 @NetInfoDecorator
 @observer
 export default class App extends PureComponent {
+
   constructor (props) {
     super(props)
     this.state = {
@@ -57,7 +58,7 @@ export default class App extends PureComponent {
   }
 }
 
-cosnt styles = StyleSheet.create({
+const styles = StyleSheet.create({
   netInfoView: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -65,7 +66,7 @@ cosnt styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     left: 0,
-    backgroundColor: rgb(217, 51, 58)
+    backgroundColor: '#f5f5f5'
   },
   netInfoPrompt: {
     color: 'white',

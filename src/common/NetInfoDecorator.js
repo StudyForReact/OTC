@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { NetInfo } from 'react-native'
 
+/**
+ * 监听组件的网络变化高阶组件装饰器
+ * @param {React Component} WrappedComponent 
+ */
 const NetInfoDecorator = WrappedComponent => class extends Component {
   constructor (props) {
     super(props)
@@ -19,3 +23,5 @@ const NetInfoDecorator = WrappedComponent => class extends Component {
     return <WrappedComponent {...this.props} {...this.state} />
   }
 }
+
+export default NetInfoDecorator

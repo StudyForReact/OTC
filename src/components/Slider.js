@@ -6,6 +6,11 @@ import {
 import Carousel from 'react-native-looped-carousel'
 import { GOLBAL_WINDOW } from '../common'
 
+/**
+ * 轮播组件
+ * @desc 基于 `react-native-looped-carousel` 封装
+ * @param {Object} props 
+ */
 export default class Slider extends PureComponent {
   static propTypes = {
     delay: React.PropTypes.number,
@@ -44,7 +49,7 @@ export default class Slider extends PureComponent {
     },
     chosenBulletStyle: {
       margin: 5,
-      backgroundColor: '#52B124'
+      backgroundColor: '#009cff'
     },
     onAnimateNextPage: () => {
       console.log('debug')

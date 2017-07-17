@@ -8,6 +8,11 @@ import {
 } from 'react-native'
 import { GOLBAL_WINDOW } from '../common'
 
+/**
+ * 搜索组件
+ * 暂时废弃
+ * @param {Object} props 
+ */
 const Search = ({...props}) => {
   return (
     <View style={styles.search}>

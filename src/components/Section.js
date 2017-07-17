@@ -9,6 +9,11 @@ import {
 import SectionTitle from './SectionTitle'
 import BrandList from './BrandList'
 
+/**
+ * 块组件
+ * @desc 暂时废弃
+ * @param {Object} props 
+ */
 const Section = ({...props}) => {
   return (
     <View
@@ -31,7 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     position: 'relative',
     flexDirection: 'column',
-    marginBottom: 5
+    marginBottom: 15
   },
   brandContainer: {
     flexDirection: 'row',
