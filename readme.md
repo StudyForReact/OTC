@@ -1,31 +1,82 @@
-写在项目开始前的话，项目开始前请认真阅读git flow工作流程，并且自己尝试后再开始。
+# OTC
 
-## 请先加入QQ群： 167124582
+> a new project which used React Native to create App
 
-## 项目目的
-项目主要是为了学习react native而建立的一个repo，有想学习的人都可以加入进来，完全开源.
+## 常用命令
 
-## 工作流程
-> 工作流程按照git flow流程开发
+具体请查看 package.json 文件
 
-1. git clone https://github.com/StudyForReact/firstRN.git *下载项目*
-2. cd firstRN && git branch [branch name] *进入项目目录并且基于master分支创建分支*
-3. git checkout [branch name] *切换到你创建的分支上面*
+``` bash
+# install dependencies
+npm install
 
-> 项目开发阶段
+# start app for ios or andriod
+npm run ios/ad
 
-1. git status *每次提交前检查所有的文件状态，查看是否是你要提交的*
-2. git add [添加你要添加的文件或文件目录] *添加文件*
-3. git commit . -m "注释" *提交到本地版本库*
-4. git pull origin [branch name] *拉取远程库代码，有冲突就解决冲突*
-5. git push origin [branch name] *推送代码*
+# TODO
+need build bash for build app
+```
 
-![附上git常用命令速查表](https://github.com/StudyForReact/firstRN/blob/master/static/git.jpg)
-[附上git flow流程](http://blog.jobbole.com/76867/)
+## 项目说明
 
-## 项目api地址
-暂无
+### git规范 (写在这里也只是尽量规范项目)
+- 好的git分支模型是什么样子的？ 👇点击下面查看
+  [a-successful-git-branching-model](http://nvie.com/posts/a-successful-git-branching-model/) 
+  ```json
+    懒的人大概看下这里：
+      主要分成两个分支
+      - master 反应生产环境的状态
+      - develop 反应最新开发环境的状态
+      - staging 发布分支
 
-## 项目目录结构
+      在这个基础上有以下几种类型的分支
+      - release-* 即将发布的分支，一般都是从功能分支提交到develop，再合并到 release-* 分支。发布前尽量少做修改
+      - hotfix-* 作为一个模块的修补分支，命名以模块名作为后缀
+      - feat-* 作为一个新模块分支，命名以模块名作为后缀
+      ...
+      合并 release-* 分支后请打上tag
+      $ git checkout master
+      切换到分支'master' 
+      $ git merge --no-ff release-* (一般为版本号)
+      由递归合并。
+      （更改摘要）
+      $ git tag -a * (一般为版本号)
+  ```
+- git 提交注释规范
+  ```json
+    build: 影响构建系统或外部依赖关系的更改（示例范围：gulp，webpack，npm）
+    ci: 更改配置文件和脚本（示例范围：Travis，Circle，BrowserStack，SauceLabs
+    docs: 仅文档更改
+    feat: 一个新功能
+    fix: 修复错误
+    perf: 改进性能的代码更改
+    refactor: 代码更改，既不修复错误也不添加功能
+    style: 不影响代码含义的变化（空白，格式化，缺少分号等）
+    test: 添加缺失测试或更正现有测试
+  ```
 
-## 项目主干分支
+### 发布前注意事项
+
+* 合并当前分支到`develop`分支 并在`develop`测试通过，合并到`release-*`分支
+* 发布前修改config/message.js 中的配置，用于显示当前发布内容
+* ...
+
+## 技术栈相关文档推荐
+
+核心技术栈(包括但不限于以下)：
+- [react-navigation](https://github.com/react-community/react-navigation) 使用react-navigation 替代官方路由
+- [mobx-react](https://github.com/mobxjs/mobx-react) mobx for react
+- [mobx](https://github.com/mobxjs/mobx) 中小型项目使用mobx替代redux 提升性能
+- [react-native-looped-carousel](https://github.com/appintheair/react-native-looped-carousel) 轮播组件
+- [react-native](https://github.com/facebook/react-native) 基于react的移动端开发框架
+- ...
+
+## 迭代说明
+
+1.0.0 / 2017-07-16 (项目初始化)
+===================
+
+* 初始化项目 `over`
+* 项目整体路由设计 `over`
+* mobx设计 `wait`
+* 封装轮播组件 `over`

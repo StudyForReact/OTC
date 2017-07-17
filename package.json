@@ -1,11 +1,12 @@
 {
-  "name": "firstRN",
-  "version": "0.0.1",
+  "name": "otc",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "ios": "react-native run-ios"
+    "ios": "react-native run-ios",
+    "ad": "react-native run-andriod"
   },
   "dependencies": {
     "mobx": "^3.1.7",
