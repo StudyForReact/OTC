@@ -24,7 +24,7 @@ const HomeRouter = TabNavigator({
         label: '首页',
         icon: ({tintColor}) => (
           <Image
-              source={require('../static/mipmap-xhdpi/collect_bt.png')}
+              source={require('../static/mipmap-xhdpi/ic_home_normal.png')}
               style={[{tintColor: tintColor}, styles.icon]}
           />
         ),
@@ -40,7 +40,7 @@ const HomeRouter = TabNavigator({
         label: 'ico专区',
         icon: ({tintColor}) => (
           <Image
-              source={require('../static/mipmap-xhdpi/collect_bt.png')}
+              source={require('../static/mipmap-xhdpi/address_empty.png')}
               style={[{tintColor: tintColor},styles.icon]}
           />
         ),
@@ -56,7 +56,7 @@ const HomeRouter = TabNavigator({
         label: '个人中心',
         icon: ({tintColor}) => (
           <Image
-              source={require('../static/mipmap-xhdpi/collect_bt.png')}
+              source={require('../static/mipmap-xhdpi/ic_user_normal.png')}
               style={[{tintColor: tintColor}, styles.icon]}
           />
         ),
