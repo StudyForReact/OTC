@@ -80,3 +80,7 @@ need build bash for build app
 * 项目整体路由设计 `over`
 * mobx设计 `wait`
 * 封装轮播组件 `over`
+
+
+### 说明
+目前就一个人在写，不想切分支，So, 我就一直用master咯...
