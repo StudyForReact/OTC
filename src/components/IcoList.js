@@ -5,13 +5,15 @@ import {
   Text,
   Image
 } from 'react-native'
-
-const BrandList = ({...props}) => {
-  alert(props.dataSource.uri)
+/**
+ * ICO 列表
+ * @param {*} param0 
+ */
+const IcoList = ({...props}) => {
   return (
     <View
       key={props.key}
-      style={styles.brandList}
+      style={styles.icoList}
     >
       <Image
         source={{uri: props.dataSource.uri}}
@@ -20,17 +22,17 @@ const BrandList = ({...props}) => {
         width: '100%'
       }} />
       <Text style={{fontSize: 15, color: '#333'}}>
-        {props.dataSource.brandName}
+        {props.dataSource.icoName}
       </Text>
       <Text style={{fontSize: 15, color: '#333'}}>
-        {props.dataSource.brandPrice}
+        {props.dataSource.icoPrice}
       </Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  brandList: {
+  icoList: {
     flex: 1,
     position: 'relative',
     flexDirection: 'column',
@@ -39,4 +41,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default BrandList
+export default IcoList

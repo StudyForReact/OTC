@@ -1,7 +1,7 @@
 /**
  * Created by ljunb on 16/8/21.
  */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   StyleSheet,
   View,
@@ -11,7 +11,14 @@ import {
   Platform
 } from 'react-native';
 
-export default class Header extends Component {
+/**
+ * 头部组件
+ * 
+ * @export Header
+ * @class Header
+ * @extends {Component}
+ */
+export default class Header extends PureComponent {
   render() {
     let NavigationBar = [];
 

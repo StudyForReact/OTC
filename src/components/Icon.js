@@ -6,19 +6,27 @@ import {
   Image
 } from 'react-native'
 
+/**
+ * Icon 组件
+ * @param {String} img icon图片资源
+ * @param {String} showDoit 是否显示红点
+ * @param {String} iconAction 点击事件
+ * @param {String} iconStyle icon样式
+ */
 const Icon = ({...props}) => {
+  const { img, showDoit, iconAction, iconStyle } = props
   return (
     <View style={[{
       width: 44,
       height: 44,
-    }, props.iconStyle]}>
+    }, iconStyle]}>
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={props.iconAction}
+        onPress={iconAction}
         style={styles.icon}
       >
-        <Image source={props.img} style={{width: 23, height: 23}}/>
-        {props.showDoit ? <View  style={styles.doit}></View> : null}
+        <Image source={img} style={{width: 23, height: 23}}/>
+        {showDoit ? <View  style={styles.doit}></View> : null}
       </TouchableOpacity>
     </View>
   )
