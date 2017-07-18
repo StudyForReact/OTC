@@ -10,10 +10,10 @@ import RootStore from '../mobx'
 import Slider from '../components/Slider'
 import Section from '../components/Section'
 import CellItem from '../components/CellItem'
+import Icon from '../components/Icon'
 import TradeTable from '../components/TradeTable'
 import img from '../../static/banner_KAC-ANS.jpg'
 import img1 from '../../static/banner_LZG-LZJ.jpg'
-import Icon from '../components/Icon'
 import LeftImg from '../../static/apple-touch-icon-152x152.png'
 import RightImg from '../../static/mipmap-xhdpi/ic_home_category_search_bg.png'
 import Util from '../common/libs'
@@ -23,14 +23,17 @@ import appApi from '../api/appApi'
 export default class HomeScene extends PureComponent {
 
   static navigationOptions = {
-    title: 'Home',
-    header: ({state, setParams}) => ({
+    title: '返回',
+    header: ({state, setParams, navigate}) => ({
       style: {
         backgroundColor: '#fff'
       },
-      right: <Icon img={RightImg} iconAction={() => alert('暂未开放')} />,
+      right: <Icon img={RightImg} iconAction={() => navigate('Search' )} />,
       left: <Icon img={LeftImg} />,
-      title: '蓝鲸淘'
+      title: <Text style={{
+        fontSize: 18,
+        color: '#000'
+      }}>蓝鲸淘</Text>
     })
   }
 
@@ -38,8 +41,8 @@ export default class HomeScene extends PureComponent {
     unReadMsg: 0
   }
 
-  navigateTo = () => {
-    this.props.navigation.navigate('Home')
+  navigateTo = (name) => {
+    this.props.navigation.navigate(name)
   }
 
   componentDidMount () {

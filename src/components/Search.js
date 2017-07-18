@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  Image
+  Image,
+  TextInput
 } from 'react-native'
 import { GOLBAL_WINDOW } from '../common'
 
@@ -14,18 +15,30 @@ import { GOLBAL_WINDOW } from '../common'
  * @param {Object} props 
  */
 const Search = ({...props}) => {
+  const { action, textStyle, enbleInput } = props
   return (
     <View style={styles.search}>
-      <TouchableOpacity
-        style={styles.searchCon}
-        activeOpacity={0.8}
-        onPress={props.action}
-      >
-        <View style={{justifyContent: 'center', alignItems: 'center', marginRight: 5}}>
-          <Image source={require('../../static/mipmap-hdpi/ic_home_category_search_bg.png')} style={{width: 15, height: 15}}/>
-        </View>
-        <Text style={[styles.text, props.textStyle]}>{props.placeholder || '请输入要搜索的内容'}</Text>
-      </TouchableOpacity>
+      {
+        enbleInput
+        ? <TextInput
+            style={styles.textInput}
+            editable={true}
+            maxLength={40}
+            placeholder="请输入要搜索的区块高度"
+            autoFocus={true}
+          />
+        : <TouchableOpacity
+            style={styles.searchCon}
+            activeOpacity={0.8}
+            onPress={action}
+          >
+            <View style={{justifyContent: 'center', alignItems: 'center', marginRight: 5}}>
+              <Image source={require('../../static/mipmap-hdpi/ic_home_category_search_bg.png')} style={{width: 15, height: 15}}/>
+            </View>
+            <Text style={[styles.text, textStyle]}>{props.placeholder || '请输入要搜索的内容'}</Text>
+          </TouchableOpacity>
+      }
+      
     </View>
   )
 }
@@ -49,5 +62,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 15,
     flexDirection: 'row'
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: '#eee',
+    color: '#999',
+    height: 35,
+    width: 250,
+    padding: 10,
+    fontSize: 14,
+    borderRadius: 10,
   }
 })

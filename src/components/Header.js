@@ -41,7 +41,7 @@ export default class Header extends Component {
       let Component = this.props.titleView;
 
       NavigationBar.push(
-        <Component key={'titleView'} action={this.props.titleAction}/>
+        <Component key={'titleView'} style={{flex: 1}} action={this.props.titleAction}/>
       )
     }
 

@@ -1,13 +1,16 @@
-import { StackNavigator, TabNavigator } from 'react-navigation'
-// Scene
-import HomeScene from './scenes/HomeScene'
-import ProfileScene from './scenes/ProfileScene'
-import IcoScene from './scenes/IcoScene'
+
 import React from 'react'
 import {
   Image,
   StyleSheet
 } from 'react-native'
+import { StackNavigator, TabNavigator } from 'react-navigation'
+// Scene
+import HomeScene from './scenes/HomeScene'
+import ProfileScene from './scenes/ProfileScene'
+import IcoScene from './scenes/IcoScene'
+import SearchScene from './scenes/SearchScene'
+
 const styles = StyleSheet.create({
   icon: {
     width: 23,
@@ -87,6 +90,10 @@ const ScenesRoute = {
   Index: {
     screen: HomeRouter,
     path: 'index'
+  },
+  Search: {
+    screen: SearchScene,
+    path: 'search'
   }
 }
 

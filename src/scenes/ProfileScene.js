@@ -26,7 +26,7 @@ export default class ProfileScene extends PureComponent {
     return (
       <ParallaxScrollView
         backgroundColor="blue"
-        contentBackgroundColor="pink"
+        contentBackgroundColor="white"
         parallaxHeaderHeight={300}
         renderForeground={() => (
           <View style={{ height: 300, flex: 1 }}>
