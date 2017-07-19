@@ -9,14 +9,13 @@ import { TRADE_HEAD, GOLBAL_WINDOW } from '../common'
 
 /**
  * 交易块头部
- * @param {Array} data 交易块头部数据源
+ * @desc 数据源不通过父组件传递
  */
-const TradeHeader = ({...props}) => {
-  const { data } = props
+const TradeHeader = () => {
   return (
     <View style={styles.tradeHeader}>
       {
-        data.map(item => {
+        TRADE_HEAD.map(item => {
           return <View key={item.key}>
             <Text style={styles.headeListText}>{ item.text }</Text>
           </View>
@@ -31,11 +30,13 @@ const TradeHeader = ({...props}) => {
  * @param {Array} data 交易块数据源
  */
 const TradeTable = ({...props}) => {
+  const { list = [], data } = props
   return (
     <View style={styles.tableWrap}>
-      <TradeHeader data={TRADE_HEAD} />
-      <TradeList />
-      <TradeList />
+      <TradeHeader />
+      { 
+        list.map(item => <TradeList />)
+      }
     </View>
   )
 }

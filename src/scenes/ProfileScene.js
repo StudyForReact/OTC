@@ -1,42 +1,182 @@
 import React, { PureComponent } from 'react'
 import {
-  View,
+  Image,
+  ListView,
   StyleSheet,
-  Text
+  Text,
+  View,
+  TouchableOpacity
 } from 'react-native'
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
-import { GOLBAL_WINDOW } from '../common' 
+import { GiftedForm } from 'react-native-gifted-form'
+import Bg from '../../static/personBg.png'
+import ProfileImg from '../../static/mipmap-xxhdpi/ic_user_normal.png'
+import BalanceImg from '../../static/mipmap-xxhdpi/ic_user_money.png'
+import TradeImg from '../../static/mipmap-xxhdpi/ic_user_dingdan.png'
+import ClaimImg from '../../static/mipmap-xxhdpi/ic_user_collect.png'
+import { GOLBAL_WINDOW } from '../common'
 
+const Row = GiftedForm.RowWidget
 export default class ProfileScene extends PureComponent {
   
   constructor (props) {
     super(props)
+    const { navigate } = this.props.navigation
+    this.state =  {
+      dataSource: [
+        {
+          title: '我的信息',
+          image: ProfileImg,
+          onPress: () => {
+            navigate('MyProfile')
+          }
+        },
+        {
+          title: '我的资产',
+          image: BalanceImg,
+          onPress: () => {
+            navigate('MyBalance')
+          }
+        },
+        {
+          title: '交易记录',
+          image: TradeImg,
+          onPress: () => {
+            navigate('TradeNote')
+          }
+        },
+        {
+          title: '提取分红',
+          image: ClaimImg,
+          onPress: () => {
+            navigate('Claim')
+          }
+        }
+      ]
+    }
   }
 
   static navigationOptions = {
     title: '个人中心',
-    header: ({state, setParams}) => ({
+    header: ({state, setParams, navigate}) => ({
       style: {
         backgroundColor: '#fff'
-      }
+      },
+      right: <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => {
+              navigate('Setting')
+            }}
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 15 }}
+          >
+            <Text style={{ color: '#555'}}>设置</Text>
+          </TouchableOpacity>
     })
   }
 
   render () {
     return (
       <ParallaxScrollView
-        backgroundColor="blue"
-        contentBackgroundColor="white"
-        parallaxHeaderHeight={300}
-        renderForeground={() => (
-          <View style={{ height: 300, flex: 1 }}>
-            <View></View>
+        headerBackgroundColor="#333"
+        contentBackgroundColor="#f5f5f5"
+        parallaxHeaderHeight={ PARALLAX_HEADER_HEIGHT }
+        backgroundSpeed={10}
+
+        renderBackground={() => (
+          <View key="background">
+            <Image source={Bg}/>
+            <View style={{position: 'absolute',
+              top: 0,
+              width: GOLBAL_WINDOW.width,
+              backgroundColor: 'rgba(0,0,0,.2)',
+              height: PARALLAX_HEADER_HEIGHT}}
+            />
           </View>
-        )}>
-        <View style={{ height: 500 }}>
-          <Text>Scroll me</Text>
+        )}
+
+        renderForeground={() => (
+          <View key="parallax-header" style={ styles.parallaxHeader }>
+            <Image style={ styles.avatar } source={{
+              uri: 'https://avatars0.githubusercontent.com/u/18143450?v=4&s=460',
+              width: AVATAR_SIZE,
+              height: AVATAR_SIZE
+            }}/>
+            <Text style={ styles.sectionSpeakerText }>
+              李毅鹏
+            </Text>
+            <Text style={ styles.sectionTitleText }>
+              登录/注册
+            </Text>
+          </View>
+        )}
+      >
+        <View style={{height: 300, marginTop: 15}}>
+          {
+            this.state.dataSource.map(item => <Row key={item.title} {...item} />)
+          }
         </View>
       </ParallaxScrollView>
     )
   }
 }
+
+const AVATAR_SIZE = 80;
+const ROW_HEIGHT = 60;
+const PARALLAX_HEADER_HEIGHT = 200;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    overflow: 'hidden'
+  },
+  background: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: GOLBAL_WINDOW.width,
+    height: PARALLAX_HEADER_HEIGHT
+  },
+  fixedSection: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10
+  },
+  fixedSectionText: {
+    color: '#999',
+    fontSize: 20
+  },
+  parallaxHeader: {
+    alignItems: 'center',
+    flex: 1,
+    height: 0,
+    flexDirection: 'column',
+    paddingTop: 40
+  },
+  avatar: {
+    marginBottom: 10,
+    borderRadius: AVATAR_SIZE / 2
+  },
+  sectionSpeakerText: {
+    color: 'white',
+    fontSize: 16,
+    paddingVertical: 5
+  },
+  sectionTitleText: {
+    color: 'white',
+    fontSize: 14,
+    paddingVertical: 5
+  },
+  row: {
+    overflow: 'hidden',
+    paddingHorizontal: 10,
+    height: ROW_HEIGHT,
+    backgroundColor: 'white',
+    borderColor: '#ccc',
+    borderBottomWidth: 1,
+    justifyContent: 'center'
+  },
+  rowText: {
+    fontSize: 20
+  }
+});

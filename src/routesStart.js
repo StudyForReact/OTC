@@ -10,6 +10,13 @@ import HomeScene from './scenes/HomeScene'
 import ProfileScene from './scenes/ProfileScene'
 import IcoScene from './scenes/IcoScene'
 import SearchScene from './scenes/SearchScene'
+import LoginScene from './scenes/LoginScene'
+import RegistScene from './scenes/RegistScene'
+import SettingScene from './scenes/SettingScene'
+import MyBalanceScene from './scenes/MyBalanceScene'
+import MyProfileScene from './scenes/MyProfileScene'
+import ClaimScene from './scenes/ClaimScene'
+import TradeNoteScene from './scenes/TradeNoteScene'
 
 const styles = StyleSheet.create({
   icon: {
@@ -85,7 +92,7 @@ const HomeRouter = TabNavigator({
   },
 })
 
-// 路由配置
+// 路由配置headerMode
 const ScenesRoute = {
   Index: {
     screen: HomeRouter,
@@ -94,6 +101,36 @@ const ScenesRoute = {
   Search: {
     screen: SearchScene,
     path: 'search'
+  },
+  Login: {
+    screen: LoginScene,
+    path: 'login',
+    headerMode: 'float'
+  },
+  Regist: {
+    screen: RegistScene,
+    path: 'regist',
+    headerMode: 'float'
+  },
+  Setting: {
+    screen: SettingScene,
+    path: 'setting'
+  },
+  MyBalance: {
+    screen: MyBalanceScene,
+    path: 'myBalance'
+  },
+  MyProfile: {
+    screen: MyProfileScene,
+    path: 'myProfile'
+  },
+  TradeNote: {
+    screen: TradeNoteScene,
+    path: 'tradeNote'
+  },
+  Claim: {
+    screen: ClaimScene,
+    path: 'claim'
   }
 }
 

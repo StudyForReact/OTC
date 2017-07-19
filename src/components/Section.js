@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 // components
 import CellItem from './CellItem'
-import BrandList from './BrandList'
+import IcoList from './IcoList'
 
 /**
  * 块组件
@@ -23,7 +23,7 @@ const Section = ({...props}) => {
       <View style={styles.brandContainer}>
         {
           props.dataSource.map((item, index) => {
-            return <BrandList dataSource={item} key={index} />
+            return <IcoList dataSource={item} key={index} />
           })
         }
       </View>

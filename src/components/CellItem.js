@@ -30,7 +30,7 @@ const CellItem = ({...props}) => {
       <Text style={styles.text}>
         {name}
       </Text>
-      {component}
+      { component }
     </View>
   )
 }

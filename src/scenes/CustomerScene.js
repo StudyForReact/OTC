@@ -25,10 +25,6 @@ export default class HomeScene extends PureComponent {
     })
   }
 
-  state = {
-    title: '我改变了title'
-  }
-
   render () {
     return (
       <View style={{flex: 1,backgroundColor: '#f5f5f5',flexDirection: 'column'}}>

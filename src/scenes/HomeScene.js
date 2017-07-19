@@ -17,7 +17,7 @@ import img1 from '../../static/banner_LZG-LZJ.jpg'
 import LeftImg from '../../static/apple-touch-icon-152x152.png'
 import RightImg from '../../static/mipmap-xhdpi/ic_home_category_search_bg.png'
 import Util from '../common/libs'
-import appApi from '../api/appApi'
+import Api from '../api'
 
 @observer
 export default class HomeScene extends PureComponent {
@@ -28,7 +28,7 @@ export default class HomeScene extends PureComponent {
       style: {
         backgroundColor: '#fff'
       },
-      right: <Icon img={RightImg} iconAction={() => navigate('Search' )} />,
+      right: <Icon img={RightImg} iconAction={() => navigate('Search')} />,
       left: <Icon img={LeftImg} />,
       title: <Text style={{
         fontSize: 18,
@@ -45,14 +45,12 @@ export default class HomeScene extends PureComponent {
     this.props.navigation.navigate(name)
   }
 
-  componentDidMount () {
-    (async () => {
-      await Util.get(appApi.banner, (response) => {
-        console.log(response)
-      }, error => {
-        console.log(error)
-      })
-    })()
+  async componentDidMount () {
+    await Util.get(Api.banner, (response) => {
+      console.log(response)
+    }, error => {
+      console.log(error)
+    })
   }
 
   render () {
