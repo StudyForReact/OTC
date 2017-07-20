@@ -9,14 +9,18 @@ import {
 } from 'react-native'
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import { GiftedForm } from 'react-native-gifted-form'
+import { observer } from 'mobx-react/native'
 import Bg from '../../static/personBg.png'
 import ProfileImg from '../../static/mipmap-xxhdpi/ic_user_normal.png'
 import BalanceImg from '../../static/mipmap-xxhdpi/ic_user_money.png'
 import TradeImg from '../../static/mipmap-xxhdpi/ic_user_dingdan.png'
 import ClaimImg from '../../static/mipmap-xxhdpi/ic_user_collect.png'
 import { GOLBAL_WINDOW } from '../common'
+import RootStore from '../mobx'
 
 const Row = GiftedForm.RowWidget
+
+@observer
 export default class ProfileScene extends PureComponent {
   
   constructor (props) {
@@ -75,6 +79,8 @@ export default class ProfileScene extends PureComponent {
   }
 
   render () {
+    const { navigate } = this.props.navigation
+    const { isLogin, user } = RootStore
     return (
       <ParallaxScrollView
         headerBackgroundColor="#333"
@@ -97,15 +103,15 @@ export default class ProfileScene extends PureComponent {
         renderForeground={() => (
           <View key="parallax-header" style={ styles.parallaxHeader }>
             <Image style={ styles.avatar } source={{
-              uri: 'https://avatars0.githubusercontent.com/u/18143450?v=4&s=460',
+              uri: isLogin ? user.avater : 'https://avatars2.githubusercontent.com/u/19566733?v=4&s=100',
               width: AVATAR_SIZE,
               height: AVATAR_SIZE
             }}/>
             <Text style={ styles.sectionSpeakerText }>
-              李毅鹏
+              {isLogin ? user.name : '您还未登录'}
             </Text>
-            <Text style={ styles.sectionTitleText }>
-              登录/注册
+            <Text style={ styles.sectionTitleText } onPress={() => isLogin ? '' : navigate('Login')}>
+              {isLogin ? '欢迎回来！' : '登录/注册'}
             </Text>
           </View>
         )}
@@ -148,10 +154,10 @@ const styles = StyleSheet.create({
   },
   parallaxHeader: {
     alignItems: 'center',
-    flex: 1,
-    height: 0,
+    justifyContent: 'center',
+    height: 200,
     flexDirection: 'column',
-    paddingTop: 40
+    paddingTop: 0
   },
   avatar: {
     marginBottom: 10,

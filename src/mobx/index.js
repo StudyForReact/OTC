@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 
 class RootStore {
   // 状态栏
@@ -11,8 +11,14 @@ class RootStore {
     content: '',
     time: 2000
   }
+  // 是否登录状态
+  @observable isLogin = false
   // 获取当前是否记录登陆状态
   @observable isRemenber = false
+
+  @action loginAction = () => {
+
+  }
 }
 
 const rootStore = new RootStore()

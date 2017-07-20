@@ -13,11 +13,24 @@ npm install
 # start app for ios or andriod
 npm run ios/ad
 
-# TODO
-need build bash for build app
+# release android
+npm run release-android 
+
+# bundle android
+npm run bundle-android 
+
+# build android
+npm run build-android
+
 ```
 
 ## 项目说明
+
+### 关于数据缓存
+
+```
+  目前并没有引入完善的数据缓存机制，过早地优化和设计反而不好，一切以需求为导向
+```
 
 ### 组件设计原则
 
@@ -86,7 +99,9 @@ need build bash for build app
 - [mobx](https://github.com/mobxjs/mobx) 中小型项目使用mobx替代redux 提升性能
 - [react-native-looped-carousel](https://github.com/appintheair/react-native-looped-carousel) 轮播组件
 - [react-native](https://github.com/facebook/react-native) 基于react的移动端开发框架
-- [react-native-parallax-scroll-view](https://github.com/jaysoo/react-native-parallax-scroll-view) 
+- [react-native-parallax-scroll-view](https://github.com/jaysoo/react-native-parallax-scroll-view)
+- [crypto-js](https://github.com/brix/crypto-js) 加密库
+- [moment](https://github.com/moment/moment) 时间格式化库
 - ...
 
 ## 迭代说明
