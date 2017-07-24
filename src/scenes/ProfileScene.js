@@ -26,34 +26,35 @@ export default class ProfileScene extends PureComponent {
   constructor (props) {
     super(props)
     const { navigate } = this.props.navigation
+    this.store = RootStore
     this.state =  {
       dataSource: [
         {
           title: '我的信息',
           image: ProfileImg,
           onPress: () => {
-            navigate('MyProfile')
+            this.store.isLogin ? navigate('MyProfile') : navigate('Login')
           }
         },
         {
           title: '我的资产',
           image: BalanceImg,
           onPress: () => {
-            navigate('MyBalance')
+            this.store.isLogin ? navigate('MyBalance') : navigate('Login')
           }
         },
         {
           title: '交易记录',
           image: TradeImg,
           onPress: () => {
-            navigate('TradeNote')
+            this.store.isLogin ? navigate('TradeNote') : navigate('Login')
           }
         },
         {
           title: '提取分红',
           image: ClaimImg,
           onPress: () => {
-            navigate('Claim')
+            this.store.isLogin ? navigate('Claim') : navigate('Login')
           }
         }
       ]
@@ -69,7 +70,7 @@ export default class ProfileScene extends PureComponent {
       right: <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
-              navigate('Setting')
+              RootStore.isLogin ? navigate('Setting') : navigate('Login')
             }}
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 15 }}
           >
@@ -80,7 +81,7 @@ export default class ProfileScene extends PureComponent {
 
   render () {
     const { navigate } = this.props.navigation
-    const { isLogin, user } = RootStore
+    const { isLogin, user } = this.store
     return (
       <ParallaxScrollView
         headerBackgroundColor="#333"

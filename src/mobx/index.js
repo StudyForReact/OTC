@@ -17,7 +17,11 @@ class RootStore {
   @observable isRemenber = false
 
   @action loginAction = () => {
-
+    alert('login')
+  }
+  
+  @action logoutAction = () => {
+    alert('logout')
   }
 }
 

@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react'
 import {
   View,
   StyleSheet,
-  Text
+  Text,
+  ListView
 } from 'react-native'
 
 import { observer } from 'mobx-react/native'
@@ -65,6 +66,7 @@ export default class HomeScene extends PureComponent {
         />
         <CellItem name="ANS各平台信息" showIcon />
         <TradeTable />
+        <ListView />
       </View>
     )
   }

@@ -6,6 +6,7 @@ import {
   Image
 } from 'react-native'
 import iconImg from '../../static/mipmap-xhdpi/ic_right_arrow_bg.png'
+import Icon from './Icon'
 
 /**
  * 块组件标题
@@ -13,7 +14,7 @@ import iconImg from '../../static/mipmap-xhdpi/ic_right_arrow_bg.png'
  * @param {Object} props 
  */
 const CellItem = ({...props}) => {
-  const { name, showIcon, customComponent, text = '去交易', link } = props
+  const { name, showIcon, customComponent, text = '去交易', link, icon } = props
   let component = null
   if (customComponent) {
     component = customComponent
@@ -27,6 +28,7 @@ const CellItem = ({...props}) => {
     <View
       style={styles.sectionTitle}
     >
+      {icon ? <Icon /> : null}
       <Text style={styles.text}>
         {name}
       </Text>
