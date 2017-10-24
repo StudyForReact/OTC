@@ -12,6 +12,7 @@
     "release-android": "cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
+    "axios": "^0.17.0",
     "bluebird": "^3.5.1",
     "crypto-js": "^3.1.9-1",
     "mobx": "^3.1.7",

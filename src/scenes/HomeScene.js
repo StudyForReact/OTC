@@ -16,7 +16,7 @@ import img from '../../static/banner_KAC-ANS.jpg'
 import img1 from '../../static/banner_LZG-LZJ.jpg'
 import LeftImg from '../../static/apple-touch-icon-152x152.png'
 import RightImg from '../../static/mipmap-xhdpi/ic_home_category_search_bg.png'
-import Util from '../common/libs'
+import fetchUtil from '../common/libs'
 import Api from '../api'
 
 @observer
@@ -46,11 +46,10 @@ export default class HomeScene extends PureComponent {
   }
 
   async componentDidMount () {
-    await Util.get(Api.banner, (response) => {
-      console.log(response)
-    }, error => {
-      console.log(error)
+    const data = await fetchUtil({
+      url: Api.getBlockHeight
     })
+    alert(data)
   }
 
   render () {
