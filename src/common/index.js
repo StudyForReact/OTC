@@ -39,3 +39,20 @@ export const TRADE_HEAD = [{
   text: '交易量',
   key: '5'
 }]
+
+export const TRADE_HEAD_OWN = [{
+  text: '资产名称',
+  key: '1'
+},{
+  text: '发行方',
+  key: '2'
+}, {
+  text: '最新价格',
+  key: '3'
+}, {
+  text: '成交量',
+  key: '4'
+}, {
+  text: '跌涨幅',
+  key: '5'
+}]

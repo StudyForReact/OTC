@@ -56,24 +56,36 @@ export default class RegistScene extends PureComponent {
       >
         <GiftedForm.SeparatorWidget />
         <GiftedForm.TextInputWidget
-          name='用户名'
-          title='用户名'
+          name='账户名'
+          title='账户名'
           placeholder='请选择您的登录文件'
           clearButtonMode='while-editing'
           onTextInputFocus={(currentText = '') => {
-            if (!currentText) {
-              let fullName = GiftedFormManager.getValue('signupForm', 'fullName');
-              if (fullName) {
-                return fullName.replace(/[^a-zA-Z0-9-_]/g, '');
-              }
-            }
             return currentText;
           }}
         />
 
         <GiftedForm.TextInputWidget
-          name='密码' // mandatory
-          title='密码'
+          name='WIF私钥'
+          title='WIF私钥'
+          placeholder='若没有WIF私钥则不同填写'
+          clearButtonMode='while-editing'
+          onTextInputFocus={(currentText = '') => {
+            return currentText;
+          }}
+        />
+
+        <GiftedForm.TextInputWidget
+          name='登录密码'
+          title='登录密码'
+          placeholder='请输入6到16位密码'
+          clearButtonMode='while-editing'
+          secureTextEntry={true}
+        />
+
+        <GiftedForm.TextInputWidget
+          name='重复密码' // mandatory
+          title='重复密码'
           placeholder='请输入6到16位密码'
           clearButtonMode='while-editing'
           secureTextEntry={true}

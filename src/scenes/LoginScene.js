@@ -5,6 +5,7 @@ import {
 } from 'react-native'
 import { GiftedForm, GiftedFormManager } from 'react-native-gifted-form'
 import moment from 'moment'
+import RNFS from 'react-native-fs'
 
 export default class LoginScene extends PureComponent {  
   static navigationOptions = {
@@ -22,15 +23,6 @@ export default class LoginScene extends PureComponent {
       <GiftedForm
         formName='loginForm'
         clearOnClose={true}
-        defaults={{
-          /*
-          username: 'Farid',
-          'gender{M}': true,
-          password: 'abcdefg',
-          country: 'FR',
-          birthday: new Date(((new Date()).getFullYear() - 18)+''),
-          */
-        }}
         validators={{
           username: {
             title: '登录文件',
@@ -61,13 +53,29 @@ export default class LoginScene extends PureComponent {
           placeholder='请选择您的登录文件'
           clearButtonMode='while-editing'
           onTextInputFocus={(currentText = '') => {
-            if (!currentText) {
-              let fullName = GiftedFormManager.getValue('signupForm', 'fullName');
-              if (fullName) {
-                return fullName.replace(/[^a-zA-Z0-9-_]/g, '');
-              }
-            }
-            return currentText;
+            RNFS.readDir(RNFS.MainBundlePath) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
+              .then((result) => {
+                console.log('GOT RESULT', result);
+
+                // stat the first file
+                return Promise.all([RNFS.stat(result[0].path), result[0].path]);
+              })
+              .then((statResult) => {
+                if (statResult[0].isFile()) {
+                  // if we have a file, read it
+                  return RNFS.readFile(statResult[1], 'utf8');
+                }
+
+                return 'no file';
+              })
+              .then((contents) => {
+                alert(contents)
+                // log the file contents
+                console.log(contents);
+              })
+              .catch((err) => {
+                console.log(err.message, err.code);
+              });
           }}
         />
 
