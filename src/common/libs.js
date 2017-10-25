@@ -39,10 +39,10 @@ export default function fetchUtil (opt) {
   const param = method === 'get' ? {
     params
   } : params
+  alert(url)
   return new Promise((resolve, reject) => {
     typeof axios[method] === 'function'
     ? axios[method](url, param)
-    .then(response => response.json())
     .then(data => resolve(data))
     .catch(error => reject(error))
     : console.warn(`传入的请求方式不对，不存在${method}方法`)

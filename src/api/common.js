@@ -32,4 +32,13 @@ export default {
    * @return {height}
    */
   getBlockHeight: `${SERVICE_PATH}/block/count`,
+
+  /**
+   * 获取市场
+   * @method GET
+   * @return {marketId, neocny, name, price, rate, volumnOfLast24Hours}
+   */
+  getNeoMarket: (market = 'neocny') => {
+    return `${SERVICE_PATH}/markets/neocny/${market}`
+  }
 }

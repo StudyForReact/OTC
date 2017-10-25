@@ -3,7 +3,7 @@ import {
 } from 'react-native'
 
 // api路径
-export const SERVICE_PATH = 'http://future.otcgo.cn/api'
+export const SERVICE_PATH = 'http://future.otcgo.cn/api/v1'
 
 // 获取设备的宽高
 export const GOLBAL_WINDOW = {
