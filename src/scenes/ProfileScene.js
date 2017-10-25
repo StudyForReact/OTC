@@ -117,7 +117,7 @@ export default class ProfileScene extends PureComponent {
           </View>
         )}
       >
-        <View style={{height: 300, marginTop: 15}}>
+        <View style={{height: GOLBAL_WINDOW.heiht - 1.64 * PARALLAX_HEADER_HEIGHT, marginTop: 15}}>
           {
             this.state.dataSource.map(item => <Row key={item.title} {...item} />)
           }

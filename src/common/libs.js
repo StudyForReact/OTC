@@ -1,5 +1,30 @@
 import axios from 'axios'
-import { path } from './constant'
+
+let Util = {
+  get (url, successCall, errorCall) {
+    fetch(url, {
+      method: 'GET',
+      credentials: 'include'
+    })
+    .then((response) => response.json())
+    .then((response) => successCall(response))
+    .catch((err) => errorCall(err))
+  },
+  post (url, data, successCall, errorCall) {
+    fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      body: JSON.stringify(data)
+    })
+    .then((response) => response.json())
+    .then((response) => successCall(response))
+    .catch((err) => errorCall(err))
+  }
+}
 
 /**
  * 简单封装请求方法
@@ -16,8 +41,9 @@ export default function fetchUtil (opt) {
   } : params
   return new Promise((resolve, reject) => {
     typeof axios[method] === 'function'
-    ? axios[method](path + url, param)
-    .then(({ data }) => resolve(data))
+    ? axios[method](url, param)
+    .then(response => response.json())
+    .then(data => resolve(data))
     .catch(error => reject(error))
     : console.warn(`传入的请求方式不对，不存在${method}方法`)
   })

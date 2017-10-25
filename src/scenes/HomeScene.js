@@ -45,11 +45,16 @@ export default class HomeScene extends PureComponent {
     this.props.navigation.navigate(name)
   }
 
-  async componentDidMount () {
-    const data = await fetchUtil({
+  componentDidMount () {
+    fetchUtil({
       url: Api.getBlockHeight
     })
-    alert(data)
+    .then((data) => {
+      alert(data)
+    })
+    .catch((err) => {
+      alert(err)
+    })
   }
 
   render () {
@@ -62,7 +67,7 @@ export default class HomeScene extends PureComponent {
             url: img1
           }]}
         />
-        <CellItem name="ANS各平台信息" showIcon />
+        <CellItem name="NEO各平台信息" showIcon />
         <TradeTable />
         <CellItem name="NEO交易区" showIcon />
         <TradeTable type={1} />
