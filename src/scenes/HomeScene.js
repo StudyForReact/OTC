@@ -18,6 +18,7 @@ import LeftImg from '../../static/apple-touch-icon-152x152.png'
 import RightImg from '../../static/mipmap-xhdpi/ic_home_category_search_bg.png'
 import fetchUtil from '../common/libs'
 import Api from '../api'
+import { List } from 'immutable'
 
 @observer
 export default class HomeScene extends PureComponent {
@@ -38,26 +39,65 @@ export default class HomeScene extends PureComponent {
   }
 
   state = {
-    unReadMsg: 0
+    unReadMsg: 0,
+    timer: null,
+    marketData: List([])
   }
 
   navigateTo = (name) => {
     this.props.navigation.navigate(name)
   }
 
-  componentDidMount () {
-    fetchUtil({
-      url: Api.getBlockHeight
+  /**
+   * 获取全部市场
+   * 
+   * @memberof HomeScene
+   */
+  getAllMarket = () => {
+    const neocnyMarket = fetchUtil({
+      url: Api.getMarket()
     })
-    .then((data) => {
-      alert(data)
+    const gascnyMarket = fetchUtil({
+      url: Api.getMarket('gascny')
     })
-    .catch((err) => {
-      alert(err)
+    const kacneoMarket = fetchUtil({
+      url: Api.getMarket('kacneo')
+    })
+    return Promise.all([neocnyMarket, gascnyMarket, kacneoMarket])
+  }
+
+  /**
+   * 轮询市场数据
+   *
+   * @memberof HomeScene
+   */
+  setIntervalMarket = () => {
+    this.state.timer = setInterval(() => {
+      
+    }, 1000)
+  }
+
+  async componentDidMount () {
+    const data = await this.getAllMarket()
+    this.setState({
+      marketData: this.state.marketData.concat(data.map((item, index) => ({
+        market: item.marketId,
+        newPrice: index === 2 ? '开拍学院' : 'neo区块链',
+        highPrice: item.price,
+        lowPrice: item.rate,
+        tradeNum: item.volumnOfLast24Hours
+      })))
     })
   }
 
+  componentWillUnmount () {
+    this.setState({
+      timer: null
+    })
+  }
   render () {
+    const { marketData } = this.state
+    console.log(marketData)
     return (
       <View style={styles.container}>
         <Slider
@@ -68,11 +108,11 @@ export default class HomeScene extends PureComponent {
           }]}
         />
         <CellItem name="NEO各平台信息" showIcon />
-        <TradeTable />
+        <TradeTable/>
         <CellItem name="NEO交易区" showIcon />
-        <TradeTable type={1} />
+        <TradeTable type={1} list={marketData.slice(2)} />
         <CellItem name="CNY交易区" showIcon />
-        <TradeTable type={1} />
+        <TradeTable type={1} list={marketData.slice(0, 2)} />
       </View>
     )
   }

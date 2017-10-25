@@ -33,11 +33,12 @@ const TradeHeader = ({...props}) => {
  */
 const TradeTable = ({...props}) => {
   const { list = [], data, type = 0 } = props
+  console.log(list)
   return (
     <View style={styles.tableWrap}>
       <TradeHeader type={type} />
       { 
-        list.map(item => <TradeList />)
+        list.map((item, index) => <TradeList key={index} />)
       }
     </View>
   )

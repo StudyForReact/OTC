@@ -38,7 +38,7 @@ export default {
    * @method GET
    * @return {marketId, neocny, name, price, rate, volumnOfLast24Hours}
    */
-  getNeoMarket: (market = 'neocny') => {
-    return `${SERVICE_PATH}/markets/neocny/${market}`
+  getMarket: (market = 'neocny') => {
+    return `${SERVICE_PATH}/markets/${market}`
   }
 }
