@@ -38,10 +38,29 @@ export default class HomeScene extends PureComponent {
     })
   }
 
+  timer = null
+
   state = {
     unReadMsg: 0,
-    timer: null,
-    marketData: List([])
+    marketData: List([{
+      market: 0,
+      newPrice: 'neo区块链',
+      highPrice: 0,
+      lowPrice: 0,
+      tradeNum: 0
+    }, {
+      market: 0,
+      newPrice: 'neo区块链',
+      highPrice: 0,
+      lowPrice: 0,
+      tradeNum: 0
+    }, {
+      market: 0,
+      newPrice: '开拍学院',
+      highPrice: 0,
+      lowPrice: 0,
+      tradeNum: 0
+    }])
   }
 
   navigateTo = (name) => {
@@ -64,6 +83,13 @@ export default class HomeScene extends PureComponent {
       url: Api.getMarket('kacneo')
     })
     return Promise.all([neocnyMarket, gascnyMarket, kacneoMarket])
+      .then(data => data.map((item, index) => ({
+        market: item.marketId,
+        newPrice: index === 2 ? '开拍学院' : 'neo区块链',
+        highPrice: item.price,
+        lowPrice: item.volumnOfLast24Hours,
+        tradeNum: item.rate
+      })))
   }
 
   /**
@@ -72,32 +98,40 @@ export default class HomeScene extends PureComponent {
    * @memberof HomeScene
    */
   setIntervalMarket = () => {
-    this.state.timer = setInterval(() => {
-      
+    this.timer = setInterval(() => {
+      this.getAllMarket()
+        .then((data) => {
+          this.setState({
+            marketData: this.state.marketData.map((value, index) => {
+              return data[index]
+            })
+          })
+        })
+        .catch((err) => {
+          console.error('setInterval error ===> ', err)
+        })
     }, 1000)
   }
 
   async componentDidMount () {
     const data = await this.getAllMarket()
     this.setState({
-      marketData: this.state.marketData.concat(data.map((item, index) => ({
-        market: item.marketId,
-        newPrice: index === 2 ? '开拍学院' : 'neo区块链',
-        highPrice: item.price,
-        lowPrice: item.rate,
-        tradeNum: item.volumnOfLast24Hours
-      })))
+      marketData: this.state.marketData.map((value, index) => {
+        return data[index]
+      })
     })
+    this.setIntervalMarket()
   }
 
   componentWillUnmount () {
-    this.setState({
-      timer: null
-    })
+    console.log('unmount')
+    clearInterval(this.timer)
+    this.timer = null
   }
+
   render () {
     const { marketData } = this.state
-    console.log(marketData)
+    console.log('render', marketData)
     return (
       <View style={styles.container}>
         <Slider

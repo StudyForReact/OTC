@@ -38,7 +38,7 @@ const TradeTable = ({...props}) => {
     <View style={styles.tableWrap}>
       <TradeHeader type={type} />
       { 
-        list.map((item, index) => <TradeList key={index} />)
+        list.map((item, index) => <TradeList {...item} key={index} />)
       }
     </View>
   )
