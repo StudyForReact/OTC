@@ -30976,7 +30976,7 @@ __d(/* NavigationTreeNode */function(global, require, module, exports) {
 'use strict';
 
 var invariant = require(24                  ); // 24 = fbjs/lib/invariant
-var immutable = require(311        ); // 311 = immutable
+var immutable = require(925        ); // 925 = immutable
 
 var List = immutable.List;
 
@@ -35583,7 +35583,7 @@ __d(/* immutable/dist/immutable.js */function(global, require, module, exports) 
 
   return Immutable;
 });
-}, 311, null, "immutable/dist/immutable.js");
+}, 925, null, "immutable/dist/immutable.js");
 __d(/* NavigatorBreadcrumbNavigationBar */function(global, require, module, exports) {
 'use strict';
 
@@ -35600,7 +35600,7 @@ var View = require(118   ); // 118 = View
 var guid = require(197   ); // 197 = guid
 var invariant = require(24                  ); // 24 = fbjs/lib/invariant
 
-var _require = require(311        ), // 311 = immutable
+var _require = require(925        ), // 925 = immutable
     Map = _require.Map;
 
 var Interpolators = NavigatorBreadcrumbNavigationBarStyles.Interpolators;
@@ -36561,7 +36561,7 @@ var View = require(118   ); // 118 = View
 
 var guid = require(197   ); // 197 = guid
 
-var _require = require(311        ), // 311 = immutable
+var _require = require(925        ), // 925 = immutable
     Map = _require.Map;
 
 var COMPONENT_NAMES = ['Title', 'LeftButton', 'RightButton'];
@@ -56989,8 +56989,10 @@ var _api = require(485     ); // 485 = ../api
 
 var _api2 = babelHelpers.interopRequireDefault(_api);
 
-var HomeScene = (0, _native.observer)(_class = (_temp2 = _class2 = function (_PureComponent) {
-  babelHelpers.inherits(HomeScene, _PureComponent);
+var _immutable = require(925        ); // 925 = immutable
+
+var HomeScene = (0, _native.observer)(_class = (_temp2 = _class2 = function (_Component) {
+  babelHelpers.inherits(HomeScene, _Component);
 
   function HomeScene() {
     var _ref;
@@ -57003,27 +57005,106 @@ var HomeScene = (0, _native.observer)(_class = (_temp2 = _class2 = function (_Pu
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = HomeScene.__proto__ || Object.getPrototypeOf(HomeScene)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-      unReadMsg: 0
+    return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = HomeScene.__proto__ || Object.getPrototypeOf(HomeScene)).call.apply(_ref, [this].concat(args))), _this), _this.timer = null, _this.state = {
+      unReadMsg: 0,
+      marketData: (0, _immutable.List)([{
+        market: 0,
+        newPrice: 'neo区块链',
+        highPrice: 0,
+        lowPrice: 0,
+        tradeNum: 0
+      }, {
+        market: 0,
+        newPrice: 'neo区块链',
+        highPrice: 0,
+        lowPrice: 0,
+        tradeNum: 0
+      }, {
+        market: 0,
+        newPrice: '开拍学院',
+        highPrice: 0,
+        lowPrice: 0,
+        tradeNum: 0
+      }])
     }, _this.navigateTo = function (name) {
       _this.props.navigation.navigate(name);
+    }, _this.getAllMarket = function () {
+      var neocnyMarket = (0, _libs2.default)({
+        url: _api2.default.getMarket()
+      });
+      var gascnyMarket = (0, _libs2.default)({
+        url: _api2.default.getMarket('gascny')
+      });
+      var kacneoMarket = (0, _libs2.default)({
+        url: _api2.default.getMarket('kacneo')
+      });
+      return Promise.all([neocnyMarket, gascnyMarket, kacneoMarket]).then(function (data) {
+        return data.map(function (item, index) {
+          return {
+            market: item.marketId,
+            newPrice: index === 2 ? '开拍学院' : 'neo区块链',
+            highPrice: item.price,
+            lowPrice: item.volumnOfLast24Hours,
+            tradeNum: item.rate
+          };
+        });
+      });
+    }, _this.setIntervalMarket = function () {
+      _this.timer = setInterval(function () {
+        _this.getAllMarket().then(function (data) {
+          _this.setState({
+            marketData: _this.state.marketData.map(function (value, index) {
+              return data[index];
+            })
+          });
+        }).catch(function (err) {
+          console.error('setInterval error ===> ', err);
+        });
+      }, 1000);
     }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
   }
 
   babelHelpers.createClass(HomeScene, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      (0, _libs2.default)({
-        url: _api2.default.getBlockHeight
-      }).then(function (data) {
-        alert(data);
-      }).catch(function (err) {
-        alert(err);
-      });
+      var data;
+      return regeneratorRuntime.async(function componentDidMount$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              console.log('enter');
+              _context.next = 3;
+              return regeneratorRuntime.awrap(this.getAllMarket());
+
+            case 3:
+              data = _context.sent;
+
+              this.setState({
+                marketData: this.state.marketData.map(function (value, index) {
+                  return data[index];
+                })
+              });
+              this.setIntervalMarket();
+
+            case 6:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, null, this);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      alert('unmount');
+      clearInterval(this.timer);
+      this.timer = null;
     }
   }, {
     key: 'render',
     value: function render() {
+      var marketData = this.state.marketData;
+
       return _react2.default.createElement(
         _reactNative.View,
         { style: styles.container },
@@ -57037,14 +57118,14 @@ var HomeScene = (0, _native.observer)(_class = (_temp2 = _class2 = function (_Pu
         _react2.default.createElement(_CellItem2.default, { name: 'NEO\u5404\u5E73\u53F0\u4FE1\u606F', showIcon: true }),
         _react2.default.createElement(_TradeTable2.default, null),
         _react2.default.createElement(_CellItem2.default, { name: 'NEO\u4EA4\u6613\u533A', showIcon: true }),
-        _react2.default.createElement(_TradeTable2.default, { type: 1 }),
+        _react2.default.createElement(_TradeTable2.default, { type: 1, list: marketData.slice(2) }),
         _react2.default.createElement(_CellItem2.default, { name: 'CNY\u4EA4\u6613\u533A', showIcon: true }),
-        _react2.default.createElement(_TradeTable2.default, { type: 1 })
+        _react2.default.createElement(_TradeTable2.default, { type: 1, list: marketData.slice(0, 2) })
       );
     }
   }]);
   return HomeScene;
-}(_react.PureComponent), _class2.navigationOptions = {
+}(_react.Component), _class2.navigationOptions = {
   title: '返回',
   header: function header(_ref2) {
     var state = _ref2.state,
@@ -57762,7 +57843,7 @@ exports.TRADE_HEAD_OWN = exports.TRADE_HEAD = exports.COLOR_SETTING = exports.GO
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var SERVICE_PATH = exports.SERVICE_PATH = 'http://future.otcgo.cn/api';
+var SERVICE_PATH = exports.SERVICE_PATH = 'http://future.otcgo.cn/api/v1';
 
 var GOLBAL_WINDOW = exports.GOLBAL_WINDOW = {
   width: _reactNative.Dimensions.get('window').width,
@@ -58112,12 +58193,13 @@ var TradeTable = function TradeTable(_ref2) {
       _props$type = props.type,
       type = _props$type === undefined ? 0 : _props$type;
 
+  console.log(list);
   return _react2.default.createElement(
     _reactNative.View,
     { style: styles.tableWrap },
     _react2.default.createElement(TradeHeader, { type: type }),
-    list.map(function (item) {
-      return _react2.default.createElement(_TradeList2.default, null);
+    list.map(function (item, index) {
+      return _react2.default.createElement(_TradeList2.default, babelHelpers.extends({}, item, { key: index }));
     })
   );
 };
@@ -58284,9 +58366,8 @@ function fetchUtil(opt) {
     params: params
   } : params;
   return new Promise(function (resolve, reject) {
-    typeof _axios2.default[method] === 'function' ? _axios2.default[method](url, param).then(function (response) {
-      return response.json();
-    }).then(function (data) {
+    typeof _axios2.default[method] === 'function' ? _axios2.default[method](url, param).then(function (_ref) {
+      var data = _ref.data;
       return resolve(data);
     }).catch(function (error) {
       return reject(error);
@@ -59268,7 +59349,13 @@ exports.default = {
     return _index.SERVICE_PATH + '/uid/' + address;
   },
 
-  getBlockHeight: _index.SERVICE_PATH + '/block/count'
+  getBlockHeight: _index.SERVICE_PATH + '/block/count',
+
+  getMarket: function getMarket() {
+    var market = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'neocny';
+
+    return _index.SERVICE_PATH + '/markets/' + market;
+  }
 };
 }, 486, null, "otc/src/api/common.js");
 __d(/* otc/src/scenes/ProfileScene.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {

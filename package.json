@@ -5,9 +5,9 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "ios": "react-native run-ios",
+    "ios": "npm run bundle-ios && react-native run-ios",
     "ad": "react-native run-android",
-    "bundle-ios": "curl http://localhost:8081/index.ios.bundle -o ios/firstRN/main.jsbundle",
+    "bundle-ios": "rm -rf ios/firstRN/main.jsbundle && curl http://localhost:8081/index.ios.bundle -o ios/firstRN/main.jsbundle",
     "build-android": "npm run release-android; osascript -e 'display notification \"DONE!\" with title \"Android built\"'",
     "bundle-android": "$NVM_BIN/react-native bundle --platform android --dev false --entry-file ./index.android.js --bundle-output android/app/src/main/assets/index.android.bundle # --assets-dest android/app/src/main/res/",
     "release-android": "cd android && ./gradlew assembleRelease && cd .."

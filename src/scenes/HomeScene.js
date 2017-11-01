@@ -124,14 +124,13 @@ export default class HomeScene extends PureComponent {
   }
 
   componentWillUnmount () {
-    console.log('unmount')
+    alert('unmount')
     clearInterval(this.timer)
     this.timer = null
   }
 
   render () {
     const { marketData } = this.state
-    console.log('render', marketData)
     return (
       <View style={styles.container}>
         <Slider
