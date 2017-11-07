@@ -109,6 +109,9 @@ npm run build-android
 - [react-native-parallax-scroll-view](https://github.com/jaysoo/react-native-parallax-scroll-view)
 - [crypto-js](https://github.com/brix/crypto-js) 加密库
 - [moment](https://github.com/moment/moment) 时间格式化库
+- [react-redux](https://github.com/reactjs/react-redux) react-redux封装
+- [redux](https://github.com/reactjs/redux) 状态管理
+- [redux-actions](https://github.com/reduxactions/redux-actions) flux规范的redux action
 - ...
 
 ## 迭代说明
