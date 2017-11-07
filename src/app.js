@@ -11,10 +11,22 @@ import { observer } from 'mobx-react/native'
 import NetInfoDecorator from './common/NetInfoDecorator'
 import AppNavigator from './routesStart'
 import RootStore from './mobx'
+import getStore from './store'
+import { addNavigationHelpers } from 'react-navigation'
+import { connect, Provider } from 'react-redux'
+
+const navReducer = (state, action) => {
+  const newState = AppNavigator.router.getStateForAction(action, state)
+  return newState || state
+}
+
+const mapStateToProps = (state) => ({
+  nav: state.nav
+})
 
 @NetInfoDecorator
 @observer
-export default class App extends PureComponent {
+class App extends PureComponent {
 
   constructor (props) {
     super(props)
@@ -49,7 +61,12 @@ export default class App extends PureComponent {
     return (
       <View style={{flex: 1}}>
         <StatusBar barStyle={RootStore.barStyle} />
-        <AppNavigator />
+        <AppNavigator navigation={
+          addNavigationHelpers({
+            dispatch: this.props.dispatch,
+            state: this.props.nav
+          })
+        }/>
         <Animated.View style={[styles.netInfoView, {top: positionY}]}>
           <Text style={styles.netInfoPrompt}>网络连接不上，请检查网络后再试</Text>
         </Animated.View>
@@ -58,6 +75,16 @@ export default class App extends PureComponent {
   }
 }
 
+const AppWidthNavigationState = connect(mapStateToProps)(App)
+const store = getStore(navReducer)
+
+export default function Root() {
+  return (
+    <Provider store={store}>
+      <AppWidthNavigationState />
+    </Provider>
+  )
+}
 const styles = StyleSheet.create({
   netInfoView: {
     justifyContent: 'center',

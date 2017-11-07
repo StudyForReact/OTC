@@ -27,7 +27,11 @@
     "react-native-gifted-form": "^0.1.0",
     "react-native-looped-carousel": "^0.1.5",
     "react-native-parallax-scroll-view": "^0.19.0",
-    "react-navigation": "^1.0.0-beta.7"
+    "react-navigation": "^1.0.0-beta.7",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-promise": "^0.5.3"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",

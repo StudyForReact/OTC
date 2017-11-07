@@ -7,6 +7,10 @@ import {
 
 import { observer } from 'mobx-react/native'
 import RootStore from '../mobx'
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
+import { List } from 'immutable'
+
 import Slider from '../components/Slider'
 import Section from '../components/Section'
 import CellItem from '../components/CellItem'
@@ -18,11 +22,10 @@ import LeftImg from '../../static/apple-touch-icon-152x152.png'
 import RightImg from '../../static/mipmap-xhdpi/ic_home_category_search_bg.png'
 import fetchUtil from '../common/libs'
 import Api from '../api'
-import { List } from 'immutable'
+import * as actions from '../store/actions/homeAction'
 
 @observer
-export default class HomeScene extends PureComponent {
-
+class HomeScene extends PureComponent {
   static navigationOptions = {
     title: '返回',
     header: ({state, setParams, navigate}) => ({
@@ -150,6 +153,9 @@ export default class HomeScene extends PureComponent {
     )
   }
 }
+export default connect(state => ({
+  news: state.news
+}), dispatch => bindActionCreators(actions, dispatch))(HomeScene)
 
 const styles = StyleSheet.create({
   container: {
