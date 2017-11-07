@@ -5,6 +5,13 @@ import {
 } from 'react-native'
 import { GiftedForm, GiftedFormManager } from 'react-native-gifted-form'
 import moment from 'moment'
+import {
+  genKeyPairHex,
+  encryptPrivateKey,
+  getCompressedPubHex,
+  ljWifkeyToPubkey,
+  ljWifkeyToHexkey
+} from '@common/wallet/LJSign'
 
 export default class RegistScene extends PureComponent {  
   static navigationOptions = {
@@ -102,9 +109,7 @@ export default class RegistScene extends PureComponent {
           }}
           onSubmit={(isValid, values, validationResults, postSubmit = null, modalNavigator = null) => {
             if (isValid === true) {
-              // prepare object
-              values.gender = values.gender[0];
-              values.birthday = moment(values.birthday).format('YYYY-MM-DD');
+              
 
             }
           }}
